@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>返回顶部功能</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            height: 2000px;
+        }
+
+        #top {
+            width: 30px;
+            height: 30px;
+            position: fixed;
+            right: 0;
+            bottom: 100px;
+            cursor: pointer;
+            opacity: 0;
+        }
+
+        .top {
+            height: 30px;
+            width: 30px;
+            position: fixed;
+            right: 0;
+            bottom: 100px;
+            animation: in 1.5s linear;
+            opacity: 1;
+        }
+
+        @keyframes in {
+            20% {
+                opacity: .2;
+            }
+
+            40% {
+                opacity: .4;
+            }
+
+            60% {
+                opacity: .6;
+            }
+
+            80% {
+                opacity: .8;
+            }
+
+            100% {
+                opacity: .95;
+            }
+        }
+
+        .down {
+            height: 30px;
+            width: 30px;
+            position: fixed;
+            right: 0;
+            bottom: 100px;
+            animation: out 1.5s infinite;
+            opacity: 1;
+        }
+
+        @keyframes out {
+            20% {
+                opacity: .95;
+            }
+
+            40% {
+                opacity: .8;
+            }
+
+            60% {
+                opacity: .6;
+            }
+
+            80% {
+                opacity: .4;
+            }
+
+            100% {
+                opacity: .2;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <img id="top" src="https://res.dcdev.net/dcdev/v1.0.3/assets/images/close.svg" alt="返回顶部图标">
+    </div>
+    <script>
+        var before_scrollH = 0;
+        window.onscroll = function () {
+            // 获取滚动条到顶部的距离、视窗的高度、滚动条的总高度 
+            var after_scrollH = document.documentElement.scrollTop || document.body.scrollTop;
+            var windowH = document.documentElement.clientHeight || document.body.clientHeight;
+            var scrollH = document.documentElement.scrollHeight || document.body.scrollHeight;
+            var differH = after_scrollH - before_scrollH; // 得到滑动的距离
+            var scrollType = differH > 0 ? 'down' : 'up'; // 判定鼠标滚动的方向
+            var toTop = document.querySelector('#top');
+            before_scrollH = after_scrollH;
+            if (after_scrollH == 0) { //// 到顶部不再显示
+                toTop.style.opacity = '0';
+            } else if (scrollType == 'down' || 'up') {  // 继续滚动淡出隐藏
+                document.querySelector('#top').className = 'down';
+            }
+            if (differH < 0) {  // 不再滚动淡入显示
+                document.querySelector('#top').className = 'top';
+            }
+            toTop.onclick = function () {  // 点击返回顶部
+                document.documentElement.scrollTop = 0;
+                document.body.scrollTop = 0;
+            }
+        }
+    </script>
+</body>
+
+</html>
