@@ -37,13 +37,32 @@
 //   return element;
 // }
 
-console.log('hi');
-
 // 第三次优化--接收并返回子函数
 const div = createElement('div', createElement('p', createElement('span', 'hi')));
 document.body.appendChild(div);
 
 function createElement(tagName, children) {
+  const element = document.createElement(tagName);
+  if (children) {  // 接收一个元素，不接收字符串
+    if (typeof children === 'string') {
+      var childElement = document.createTextNode(children); // 创建一个文本节点
+      element.appendChild(childElement);
+    } else {
+      element.appendChild(children);
+    }
+  }
+  return element;
+}
+
+// 第四次优化
+const div = (
+  t('div',
+    t('p',
+      t('span', 'hi')))
+);
+document.body.appendChild(div);
+
+function t(tagName, children) {
   const element = document.createElement(tagName);
   if (children) {  // 接收一个元素，不接收字符串
     if (typeof children === 'string') {
