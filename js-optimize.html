@@ -1,0 +1,38 @@
+// 原版
+// const div = document.createElement('div');
+// const p = document.createElement('p');
+// const span = document.createElement('span');
+// div.appendChild(p);
+// div.appendChild(span);
+// span.innerText = '我是一个span';
+// document.body.appendChild(div);
+
+// 第一次优化--创建函数
+// const div = createElement('div');
+// const p = createElement('p');
+// const span = createElement('span');
+// div.appendChild(p);
+// div.appendChild(span);
+// span.innerText = '我是一个span';
+// document.body.appendChild(div);
+
+// function createElement(tagName) {
+//   return document.createElement(tagName);
+// }
+
+// 第二次优化--接收子函数
+// const div = createElement('div');
+// const p = createElement('p');
+// const span = createElement('span');
+// div.appendChild(p);
+// div.appendChild(span);
+// span.innerText = '我是一个span';
+// document.body.appendChild(div);
+
+// function createElement(tagName, children) {
+//   const element = document.createElement(tagName);
+//   if (children) {
+//     element.appendChild(children)
+//   }
+//   return element;
+// }
