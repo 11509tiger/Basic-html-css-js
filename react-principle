@@ -1,0 +1,60 @@
+// react原理
+import React from 'react'
+import ReactDOM from 'react-dom'
+// 利用原生js实现组件化
+const Header = (
+  <header>
+    header
+  </header>
+)
+const Header2 = function (props) {
+  return (
+    <header>
+      header {props.name}
+    </header>
+  )
+}
+const Bottom = (
+  <div>
+    bottom
+  </div>
+)
+const Bottom2 = function () {
+  // 状态初始值useState是0 状态值是n 状态的更新方法是setN
+  const [n, setN] = React.useState(0);  // 析构赋值
+  return (
+    <div>
+      {n}
+      <button onClick={function () {
+        setN(n + 1)
+      }}>+1</button>
+    </div>
+  )
+}
+// 使用es6 新语法类创建 Bottom3
+class Bottom3 extends React.Component {
+  render() {
+    return (
+      <div>bottom 3</div>
+    )
+  }
+}
+const div = (
+  <div>
+    {Header}
+    {Header2({ name: 'jack' })}
+    <Header2 name='frank' />
+    <p>
+      <span>hi</span>
+    </p>
+    {Bottom}
+    <Bottom2 />
+    <Bottom3 />
+  </div >
+)
+
+console.log(div);  // 不是element 而是虚拟的element--就是一个对象
+// document.body.appendChild(div)  // 会提示这个参数不是一个节点，而是一个假的节点--虚拟dom
+
+// 用render方法挂载到body下面 public目录下的html文件有root这个id属性
+ReactDOM.render(div, document.getElementById('root'));
