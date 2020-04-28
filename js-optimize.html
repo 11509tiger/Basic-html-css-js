@@ -74,3 +74,19 @@ function t(tagName, children) {
   }
   return element;
 }
+
+// react原理
+import React from 'react'
+import ReactDOM from 'react-dom'
+// 利用createElement方法创建一个虚拟的div
+const div = (
+  React.createElement('div', null,
+    React.createElement('p', null,
+      React.createElement('span', null, 'hi')))
+);
+
+console.log(div);  // 不是element 而是虚拟的element--就是一个对象
+// document.body.appendChild(div)  // 会提示这个参数不是一个节点，而是一个假的节点--虚拟dom
+
+// 用render方法挂载到body下面 public目录下的html文件有root这个id属性
+ReactDOM.render(div, document.getElementById('root'));
